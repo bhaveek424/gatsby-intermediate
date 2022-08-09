@@ -1,0 +1,44 @@
+Arguments: 
+  /home/hp/.nvm/versions/node/v16.6.1/bin/node /home/hp/.nvm/versions/node/v16.6.1/bin/yarn
+
+PATH: 
+  /home/hp/.nvm/versions/node/v16.6.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.6.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@ardatan/aggregate-error/-/aggregate-error-0.0.6.tgz: Request failed "503 Service Unavailable"
+      at ResponseError.ExtendableBuiltin (/home/hp/.nvm/versions/node/v16.6.1/lib/node_modules/yarn/lib/cli.js:696:66)
+      at new ResponseError (/home/hp/.nvm/versions/node/v16.6.1/lib/node_modules/yarn/lib/cli.js:802:124)
+      at Request.<anonymous> (/home/hp/.nvm/versions/node/v16.6.1/lib/node_modules/yarn/lib/cli.js:66215:16)
+      at Request.emit (node:events:394:28)
+      at Request.module.exports.Request.onRequestResponse (/home/hp/.nvm/versions/node/v16.6.1/lib/node_modules/yarn/lib/cli.js:141767:10)
+      at ClientRequest.emit (node:events:394:28)
+      at HTTPParser.parserOnIncomingClient (node:_http_client:621:27)
+      at HTTPParser.parserOnHeadersComplete (node:_http_common:128:17)
+      at HTTPParser.execute (<anonymous>)
+      at TLSSocket.socketOnData (node:_http_client:487:22)
+
+npm manifest: 
+  {
+      "private": true,
+      "workspaces": ["site"],
+  
+      "scripts": {
+          "develop": "yarn workspace site develop",
+          "build": "yarn workspace site build"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
