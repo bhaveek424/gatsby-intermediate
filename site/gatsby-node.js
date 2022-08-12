@@ -1,3 +1,6 @@
+const fetch = require('node-fetch')
+const { createRemoteFileNode } = require('gatsby-source-filesystem') // to display images of the book(cover)
+
 const authors = require('./src/data/authors.json')
 const books = require('./src/data/books.json')
 
@@ -60,4 +63,55 @@ exports.createPages = ({ actions }) => {
 
 
     })
+}
+
+exports.createResolvers = ({ 
+    actions,
+    cache,
+    createNodeId,
+    createResolvers,
+    store,
+    reporter,
+ }) => {
+    const { createNode } = actions;
+    const resolvers = {
+        Book: {
+            buyLink: {
+                type: 'String',
+                resolve: (source) => `https://www.powells.com/searchresults?keyword=${source.isbn}`
+            },
+            cover: {
+                type: 'File',
+                resolve: async(source) => { //because we are gonna make a request to fetch api so we'll use async
+                    const response = await fetch(
+                        `https://openlibrary.org/isbn/${source.isbn}.json`
+                        )
+
+                        if(!response.ok) {
+                            reporter.warn(
+                                `Error loading details about ${source.name} - got ${response.status} ${response.statusText}`
+                            )
+                            return null;
+                        }
+
+                        const { covers } = await response.json()
+
+                        if(covers.length) {
+                            return createRemoteFileNode({
+                                url: `https://covers.openlibrary.org/b/id/${covers[0]}-L.jpg`,
+                                store,
+                                cache,
+                                createNode,
+                                createNodeId,
+                                reporter
+                            })
+                        } else {
+                            return null;
+                        }
+                } 
+            }
+        }
+    }
+
+    createResolvers(resolvers)
 }
