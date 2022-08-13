@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const { createRemoteFileNode } = require('gatsby-source-filesystem') // to display images of the book(cover)
+const slugify = require('slugify')
 
 const authors = require('./src/data/authors.json')
 const books = require('./src/data/books.json')
@@ -47,7 +48,7 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest}) => {
 
 } // to load up data into gatsby
 
-exports.createPages = ({ actions }) => {
+exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions;
 
     // We'll pass createPage as an object
@@ -62,6 +63,44 @@ exports.createPages = ({ actions }) => {
         } // whatever we pass here is gonna be available to our gatsby site
 
 
+    })
+
+    const result = await graphql(`
+      query GetBooks {
+        allBook {
+          nodes {
+            id
+            series
+            name
+          }
+        }
+      }   
+    `);
+
+    const books = result.data.allBook.nodes;
+
+    books.forEach((book) => {
+      const bookSlug = slugify(book.name, { lower: true});
+
+ if (book.series === null) {
+      createPage({
+        path: `/book/${bookSlug}`,
+        component: require.resolve('./src/templates/book.js'),
+        context: {
+          id: book.id,
+        },
+      });
+      } else {
+        const seriesSlug = slugify(book.series, {lower: true})
+
+        createPage({
+          path: `/book/${seriesSlug}/${bookSlug}`,
+          component: require.resolve('./src/templates/book.js'),
+          context: {
+            id: book.id,
+          }
+        })
+      }
     })
 }
 
