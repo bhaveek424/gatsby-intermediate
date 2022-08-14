@@ -31,6 +31,7 @@ export default function BookPage({ data }) {
     <>
       <div className={listing}>
         <GatsbyImage image={getImage(book.cover)} alt={book.name} />
+        <div>
         <h1 className={heading}>{book.name} </h1>
         <p>
           Author: <Link to={`/${book.author.slug}`}>{book.author.name}</Link>
@@ -41,6 +42,7 @@ export default function BookPage({ data }) {
           </p>
         )}
       </div>
+</div>
       <Link to="/books">&larr; back to all books</Link>
     </>
   )
