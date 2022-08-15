@@ -5,5 +5,8 @@
     "license": "MIT",
     "peerDependencies": {
         "gatsby": "^4.20.0"
+    },
+    "dependencies": {
+        "gatsby-plugin-layout": "^3.20.0"
     }
 }

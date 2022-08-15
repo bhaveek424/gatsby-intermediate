@@ -1,3 +1,3 @@
-# Intermediate Gatsby on Frontend Masters
+# Intermediate Gatsby 
 
-This is the project we'll work through during the Frontend Masters Intermediate Gatsby course.
+Development in progrs...
