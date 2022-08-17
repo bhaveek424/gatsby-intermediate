@@ -21,6 +21,6 @@
   
   .link:focus,
   .link:hover {
-    background: var(--white);
+    background: var(--gray);
     color: var(--black);
   }
