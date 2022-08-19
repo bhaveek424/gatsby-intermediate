@@ -15,8 +15,16 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "gatsby": "^3.11.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "gatsby": "^4.20.0",
+    "gatsby-plugin-image": "^2.20.0",
+    "gatsby-plugin-netlify": "^5.0.1",
+    "gatsby-plugin-sharp": "^4.20.0",
+    "gatsby-source-filesystem": "^4.20.0",
+    "gatsby-theme-shared-nav": "*",
+    "gatsby-transformer-sharp": "^4.20.0",
+    "node-fetch": "^2.6.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "slugify": "^1.6.5"
   }
 }
